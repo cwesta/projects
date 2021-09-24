@@ -1,12 +1,12 @@
 
 from cryptography.fernet import Fernet
+from os.path import exists
 
-'''
+
 def write_key():
     key = Fernet.generate_key()
     with open("key.key", "wb") as key_file:
         key_file.write(key)
-'''
 
 
 def load_key():
@@ -14,6 +14,12 @@ def load_key():
     key = file.read()
     return key
 
+
+# check if the key file exists
+if exists("key.key"):
+    pass
+else:
+    write_key()
 
 master_pwd = input("What is the master password? ")
 key = load_key() + master_pwd.encode()
